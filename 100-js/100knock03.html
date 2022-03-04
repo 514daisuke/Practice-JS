@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>100knock</title>
+</head>
+<header>
+    practice 21-30
+</header>
+
+<body>
+    <!-- JQueryのプラグイン -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+    // ## 21nまでの和
+    //     ある2以上の整数`n`が与えられます．
+    //     1から`n`までの和を出力する`getSum()`関数を作成してください．
+
+    function getSum(n) {
+        sum = 0;
+        for(i=0;i<=n;i++){
+            sum = sum + i;
+        }
+        return sum
+    }
+
+    console.log(getSum(10));    // 55
+    console.log(getSum(99));    // 4950
+
+
+    // ## 22数字の桁数
+    //    ある10進数の正の整数`n`が与えられます．
+    //    `n`が何桁かを数字で出力する`getNumberOfDigits()`関数を作成してください．
+    // 数値を文字列に変換する必要
+
+    function getNumberOfDigits(n) {
+        return String(n).length
+    }
+
+    console.log(getNumberOfDigits(100));    // 3
+    console.log(getNumberOfDigits(114514));    // 6
+
+    // ## 23サイコロの裏面
+    //     一般的な6面サイコロの目を表す整数`n`に対し，その裏側にある目を出力する`getBackSide()`関数を作成してください．
+
+    function getBackSide(n) {
+        return (7-n);
+    }
+
+    console.log(getBackSide(1));    // 6
+    console.log(getBackSide(3));    // 4
+
+    // ## 24単位の変換
+    //     ある正の整数`n`が入力されます．
+    //     `n`分から秒へ変換する`convertToSeconds()`関数を作成してください．
+
+    function convertToSeconds(n) {
+        let sec = 60;
+        return n*sec;
+    }
+
+    console.log(convertToSeconds(16));    // 960
+    console.log(convertToSeconds(3));    // 180
+
+
+    // ## 25充電時間
+    //     1分間で1 % の充電が可能なスマートフォンの充電器があります．
+    //     現在のスマートフォンのバッテリーの残量`n` % からこの充電器で100 % まで充電するのに何分かかるかを求める`getTimeUntilFull()`関数を作成してください．
+    //     質問の意図があってる？
+
+    function getTimeUntilFull(n) {
+        return 100 - n;
+    }
+
+    console.log(getTimeUntilFull(70));    // 30
+    console.log(getTimeUntilFull(25));    // 75
+
+
+    // ## 26頭文字
+    //     あなたは半角アルファベットの苗字と名前からそれぞれ 1文字目を取りイニシャルを作ることにしました．
+    //     半角スペース区切りで苗字と名前が入力されるので，1文字目を取り "."(半角ドット)で区切った文字列を出力する`getInitialFromName()`関数を作成してください．
+
+    function getInitialFromName(s) {
+        var result = [];
+        result = s.split(' ');
+        // console.log(result)
+        for(i =0; i < 2; i++){
+            // console.log(result[i])
+            result[i] = result[i].slice(0, 1);
+        }
+        // console.log(result[0], result[1])
+        return (result[0]+"."+result[1])
+    }
+
+    console.log(getInitialFromName('Dio Brando'));    // D.B
+    console.log(getInitialFromName('Pannacotta Fugo'));    // P.F
+    console.log(getInitialFromName('Gyro Zeppeli'));    // G.Z
+
+
+
+    // ## 27どれにしようかな
+    //     あなたはレストランで何を注文しようか迷っています．しかしあまり時間がないので「どれにしようかな天の神様の言うとおり」で决めてしまいましょう．
+    //     メニューの数`n`を入力し，選ばれた1から`n`までの数の一つを出力する`choiceOfGod()`関数を作成してください．
+    //     選ばれるメニューはこの文字数 21 を迷っているメニューの数で割れば求められます．ただし余りが 0 となるときはそのメニューの中で最後のものが選ばれることに注意しましょう．
+    //     ハマった。仕様がわからなかった
+
+    function choiceOfGod(n) {
+        let array = [];
+        array = "どれにしようかなてんのかみさまのいうとおり";
+        //  console.log(array.length);
+        //  console.log(n);
+        //  choice = array.length%n;
+        //  return choice;
+        if(array.length%n === 0){
+            return n
+        }else{
+            return array.length%n
+        }
+        // var random = Math.floor(Math.random() * n);
+        // console.log(random)
+    }
+
+    console.log(choiceOfGod(4));    // 1
+    console.log(choiceOfGod(3));    // 3
+
+
+
+    // ## 28日付のデータ
+    //     スペース区切りで西暦`y`，月`m`，日`d`が入力されます．
+    //     `/`区切りで文字列として出力する`formatYMD()`関数を作成してください．
+    //     ただし，西暦は4桁，月と日は2桁で出力しましょう
+
+    function formatYMD(s) {
+        var result = [];
+        for(i = 0; i<s.length;i++ ){
+            result[i]  = s.split(/\s/).map(Number)[i];
+        }
+        return ('0000' + result[0]).slice(-4) + "/" + ('00' + result[1]).slice(-2) + "/" + ('00' + result[2]).slice(-2)
+        }
+
+    console.log(formatYMD('2021 1 1'));    // 2021/01/01
+    console.log(formatYMD('2020 10 10'));    // 2020/10/10
+    console.log(formatYMD('794 11 29'));    // 0794/11/29
+
+
+    // ## 29アットマーク
+    //     半角小文字アルファベットで構成された文字列`s`が入力されます．
+    //     文字列`s`の中に含まれる`at`という文字列を全て`@`(アットマークに)置換して出力する`convertAtToAtMark()`関数を作成してください．
+    //  正規表現のやつ
+
+    function convertAtToAtMark(s) {
+        return s.replace(/at/g, '@');
+    }
+
+    console.log(convertAtToAtMark('gsatcodeatquantity'));    // gs@code@quantity
+    console.log(convertAtToAtMark('atatatjojoatatat'));    // @@@jojo@@@
+
+
+    // ## 30花粉症でつらい
+    //     あなたは花粉症でティッシュを毎日使っては買いに行くのを繰り返していましたが，必要なティッシュ箱の数を計算し一気に注文しようと考えました．
+    //     ティッシュ1箱が空になるまでの期間を`m`日，残りの花粉症の季節を`n`日が入力されるので，花粉症の季節が終わるまでに必要なティッシュ箱の数を求める`getNeedBox()`関数を作成してください．
+
+    function getNeedBox(m, n) {
+        return Math.floor(n / m) + 1;
+    }
+    console.log(getNeedBox(7, 30));    // 5
+    console.log(getNeedBox(3, 100));    // 34
+    console.log(getNeedBox(7, 5));    // 1
+
+    </script>
+</body>
+
+</html>
