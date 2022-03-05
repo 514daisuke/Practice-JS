@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sriracha&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <title>My Photos</title>
+</head>
+<body>
+    <header>
+        <h1>My Photos_ajax</h1>
+    </header>
+
+    <div class="container">
+        <div id="img_unit">
+        </div>
+    </div>
+
+    <script>
+        let ajax = new XMLHttpRequest();
+        ajax.open('GET', 'https://h2o-space.com/htmlbook/images.php');
+        ajax.responseType = 'json';
+        ajax.send(null);
+
+        ajax.onreadystatechange = function(){
+            // alert(ajax.readyState);
+                if(ajax.readyState === XMLHttpRequest.DONE && ajax.status === 200){
+                    for(let i =0; i<this.response.length; i++){
+                        // alert(this.response[i].path);
+                        let data = this.response[i];
+
+                        let img = document.createElement('img');
+                        img.setAttribute('src', data.path);
+
+                        let caption = document.createElement('div');
+                        caption.className = 'inner';
+                        caption.innerHTML = '<p>' + data.caption + '<span>' + data.name + '</span></p>';
+
+                        let div = document.createElement('div');
+                        div.className = 'photo';
+                        div.appendChild(img);
+                        div.appendChild(caption);
+
+                        document.getElementById('img_unit').appendChild(div);
+                    }
+                }
+        };
+    </script>
+</body>
+</html>
